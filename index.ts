@@ -37,7 +37,7 @@ interface userData{
 }
 
 const roomname:string = 'chat-room';
-const PORT = process.env.PORT || 6010;
+const PORT = process.env.PORT || 3000;
 
 
 server.listen(PORT, () => {
