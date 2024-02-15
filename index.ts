@@ -2,23 +2,28 @@
 const express = require('express')
 const http = require('http');
 const socketIo = require('socket.io');
-const cors = require('cors');
 require('dotenv').config()
-
-
 const app = express();
-const server = http.createServer(app);
-const io = socketIo(server);
 
+const cors = require('cors');
 
 const corsOptions ={
-    origin:'https://wordle-cup-assignment.vercel.app', 
+    origin:'*', 
     credentials:true,           
 }
 app.use(cors(corsOptions));
 app.use(express.json());
 
 
+const server = http.createServer(app);
+
+const io = socketIo(server,{
+    cors: {
+        origin: '*',
+        methods: ['GET', 'POST'],
+        allowedHeaders: ['Access-Control-Allow-Origin']
+      }
+});
 
 //http://localhost:5173
 //https://wordle-cup-assignment.vercel.app/
@@ -33,7 +38,7 @@ interface userData{
 }
 
 const roomname:string = 'chat-room';
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 6010;
 
 
 server.listen(PORT, () => {
