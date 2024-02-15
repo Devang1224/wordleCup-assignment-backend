@@ -8,7 +8,7 @@ const app = express();
 const cors = require('cors');
 
 const corsOptions ={
-    origin:'https://wordle-cup-assignment.vercel.app/', 
+    origin:'https://wordle-cup-assignment.vercel.app', 
     credentials:true,           
 }
 app.use(cors(corsOptions));
@@ -19,7 +19,7 @@ const server = http.createServer(app);
 
 const io = socketIo(server,{
     cors: {
-        origin: 'https://wordle-cup-assignment.vercel.app/',
+        origin: 'https://wordle-cup-assignment.vercel.app',
         methods: ['GET', 'POST']
       }
 });
