@@ -2,6 +2,7 @@
 const express = require('express')
 const http = require('http');
 const socketIo = require('socket.io');
+require('dotenv').config()
 const app = express();
 
 const cors = require('cors');
@@ -36,9 +37,10 @@ interface userData{
 }
 
 const roomname:string = 'chat-room';
+const PORT = process.env.PORT || 6010;
 
 
-server.listen(3000, () => {
+server.listen(PORT, () => {
     console.log('server is running');
 })
 

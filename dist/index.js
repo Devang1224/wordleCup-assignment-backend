@@ -1,20 +1,25 @@
 "use strict";
-const { Server } = require('socket.io');
 const express = require('express');
 const http = require('http');
-const cors = require('cors');
+const socketIo = require('socket.io');
 const app = express();
-const server = http.createServer(app);
-app.use(cors());
+const cors = require('cors');
+const corsOptions = {
+    origin: 'https://wordle-cup-assignment.vercel.app/',
+    credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
+const server = http.createServer(app);
+const io = socketIo(server, {
+    cors: {
+        origin: 'https://wordle-cup-assignment.vercel.app/',
+        methods: ['GET', 'POST']
+    }
+});
 const roomname = 'chat-room';
 server.listen(3000, () => {
     console.log('server is running');
-});
-const io = new Server(server, {
-    cors: {
-        origin: 'http://localhost:5173'
-    }
 });
 io.on('connection', (socket) => {
     socket.join(roomname);
